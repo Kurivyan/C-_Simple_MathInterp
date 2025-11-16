@@ -35,7 +35,7 @@ public static class ParserExtension
 		if(curent.match(TokenType.PLUS) || curent.match(TokenType.MINUS))
 		{
 			string op = token.value!;
-			ASTNode right = parse_mul(curent);
+			ASTNode right = parse_sum(curent);
 			return (new BinaryNode(op, left, right));
 		}
 		return left;
@@ -50,7 +50,7 @@ public static class ParserExtension
 		if(curent.match(TokenType.STAR) || curent.match(TokenType.SLASH))
 		{
 			string op = token.value!;
-		 	ASTNode right = parse_pow(curent);
+		 	ASTNode right = parse_sum(curent);
 			return (new BinaryNode(op, left, right));
 		}
 		return left;
@@ -65,7 +65,7 @@ public static class ParserExtension
 		if(curent.match(TokenType.CARET))
 		{
 			string op = token.value!;
-			ASTNode right = parse_pow(curent);
+			ASTNode right = parse_sum(curent);
 			return (new BinaryNode(op, left, right));
 		}
 		return left;
