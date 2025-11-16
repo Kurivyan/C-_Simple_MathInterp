@@ -88,7 +88,7 @@ public static class LexerExtension
 	public static (int index, Token type) extract_id(string str, int i)
 	{
 		int current = i;
-		while(i < str.Length && Char.IsLetter(str[i]) || str[i] == '_')
+		while(i < str.Length && ( Char.IsLetter(str[i]) || str[i] == '_' ))
 			i++;
 		return (i,
 						 new Token(TokenType.ID, str.Substring(current, i - current)));
