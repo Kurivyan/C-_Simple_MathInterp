@@ -6,13 +6,15 @@ class Program
 	{
 		while(true)
 		{
-			string input = ReadLine()!.DeleteSpaces();
+			string input = ReadLine();
 			if(input == null)
 				break;
 			if(string.IsNullOrWhiteSpace(input))
 				continue;
-				
-			Lexer tokens = new Lexer(input).Tokenize();
+
+			string stringified_input = input.DeleteSpaces();
+
+			Lexer tokens = new Lexer(stringified_input).Tokenize();
 	
 			ASTNode tree = new Parser(tokens.Tokens!).Parse();
 
@@ -25,7 +27,7 @@ class Program
 			funcs.Add("pow", (x)=> Math.Pow(x[0], x[1]) );
 			funcs.Add("sin", (x)=> Math.Sin(x[0]));
 
-			WriteLine($"Result of {input} = {tree.Evaluate(vars, funcs)}");
+			WriteLine($"Result of {stringified_input} = {tree.Evaluate(vars, funcs)}");
 		}
 	}
 }
