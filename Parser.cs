@@ -32,11 +32,11 @@ public static class ParserExtension
 		if(curent.Current == null)
 			return left;
 		Token token = curent.Current;
-		if(curent.match(TokenType.PLUS) || curent.match(TokenType.MINUS))
+		while(curent.match(TokenType.PLUS) || curent.match(TokenType.MINUS))
 		{
 			string op = token.value!;
-			ASTNode right = parse_sum(curent);
-			return (new BinaryNode(op, left, right));
+			ASTNode right = parse_mul(curent);
+			left = (new BinaryNode(op, left, right));
 		}
 		return left;
 	}
@@ -47,11 +47,11 @@ public static class ParserExtension
 		if(curent.Current == null)
 			return left;
 		Token token = curent.Current;
-		if(curent.match(TokenType.STAR) || curent.match(TokenType.SLASH))
+		while(curent.match(TokenType.STAR) || curent.match(TokenType.SLASH))
 		{
 			string op = token.value!;
-		 	ASTNode right = parse_sum(curent);
-			return (new BinaryNode(op, left, right));
+		 	ASTNode right = parse_pow(curent);
+			left = (new BinaryNode(op, left, right));
 		}
 		return left;
 	}
@@ -65,8 +65,8 @@ public static class ParserExtension
 		if(curent.match(TokenType.CARET))
 		{
 			string op = token.value!;
-			ASTNode right = parse_sum(curent);
-			return (new BinaryNode(op, left, right));
+			ASTNode right = parse_pow(curent);
+			left = (new BinaryNode(op, left, right));
 		}
 		return left;
 	}
